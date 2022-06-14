@@ -7,13 +7,16 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
+import type { Node } from 'react';
 import {
+  Alert,
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
 } from 'react-native';
@@ -26,7 +29,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
+const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -59,18 +62,42 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <Section>
-        <Text>Note App</Text>
-      </Section>
+
+    <SafeAreaView style={styles.sectionContainer}>
+      <View style={{height: "100%"}}>
+        <View>
+          <Text style={{fontSize: 20}}>Note Taker</Text>
+          <TextInput style={{ backgroundColor: '#ededed', height: 60 }} placeholder="text here" />
+        </View>
+
+        <View style={styles.noteButton}>
+          <Button
+            title="Create Note"
+            onPress={() => Alert.alert('Button pressed')}
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  noteButton: {
+    position: 'absolute',
+    bottom: 50,
+    left: 50,
+    right: 50,
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
   sectionContainer: {
-    marginTop: 32,
+    marginTop: 10,
     paddingHorizontal: 24,
   },
   sectionTitle: {
